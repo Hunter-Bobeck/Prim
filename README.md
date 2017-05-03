@@ -23,7 +23,7 @@ Graph adjustments:
 * *Touchpad Press* - create node
 * *Touchpad Hold* - create edge from initially contacted node to finally contacted node 
 * *Trigger Press and Hold* - grab and reposition contacted node
-* *Grip Press - Single Controller* - delete contacted node\edge
+* *Grip Press - Single Controller* - delete contacted node
 * *Grip Press - Both Controllers* - delete all elements in the graph
 
 Prim's Algorithm command:
