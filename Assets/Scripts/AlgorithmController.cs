@@ -76,5 +76,7 @@ public class AlgorithmController : MonoBehaviour
         {
             connectedEdge.GetComponent<LineRenderer>().material = highlighted;
         }
+
+        List<GameObject> edgesToHighlight = PrimCode.Prim(containerNodes);
     }
 }

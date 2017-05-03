@@ -31,4 +31,22 @@ public class ConnectedEdges : MonoBehaviour
         // otherwise, return false
         return false;
     }
+
+    // method: determine if this node has an edge connecting it to the given node, and if so, return it; otherwise, return null //
+    /* example usage to determine if a node 'u' has a connection to a node 'v': bool connected = (u.GetComponent<ConnectedEdges>().connectedTo(v) == null) */
+    /* example usage to determine get the edge by which a node 'u' is connected to a node 'v': GameObject edge = u.GetComponent<ConnectedEdges>().connectedTo(v); */
+    public GameObject connectedTo(GameObject otherNode)
+    {
+        foreach (GameObject connectedEdge in connectedEdges)
+        {
+            List<GameObject> connectedEdgeConnectedNodes = connectedEdge.GetComponent<ConnectedNodes>().connectedNodes;
+            
+            foreach (GameObject connectedEdgeConnectedNode in connectedEdgeConnectedNodes)
+            {
+                if (connectedEdgeConnectedNode == otherNode)
+                    return connectedEdge;
+            }
+        }
+        return null;
+    }
 }
