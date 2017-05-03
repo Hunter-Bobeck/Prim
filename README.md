@@ -28,5 +28,3 @@ Graph adjustments:
 
 Prim's Algorithm command:
 * *Menu Button Press - Either Controller* - toggle the Prim minimum spanning tree visualization; when starting, the starting node will be chosen to be the node nearest to the controller doing the pressing
-
-When making any adjustments to the graph, if the Prim minimum spanning tree is currently displaying, it will be toggled off.
