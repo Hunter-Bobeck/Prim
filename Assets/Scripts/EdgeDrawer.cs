@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// handles drawing of edges from a starting node to a target node; creates a new node when no target node is found //
+// handles drawing of edges from a starting node to a target node //
 public class EdgeDrawer : MonoBehaviour
 {
-    public GameObject nodeTemplate;      // connection: node template
     public GameObject edgeTemplate;     // connection: edge template
 
     private GameObject edgeBeingDrawn;       // tracking: edge being currently drawn (if null, then none is)
     private GameObject startingNode;        // tracking: starting node for the edge being currently drawn (if null, then no edge is currently being drawn so there is no starting node to track)
 
     public Transform edgesContainer;       // connection: edges container - transform
-    public Transform nodesContainer;       // connection: nodes container - transform
 
     void Update()
     {
@@ -43,27 +41,11 @@ public class EdgeDrawer : MonoBehaviour
             // set the edge's position to be the midpoint between its ends' (deriving) positions //
             edgeBeingDrawn.transform.position = Vector3.Lerp(startingNode.transform.position, transform.position, .5f);
         }
-        // edge drawing: canceling an edge – no target node found, so create one //
+        // edge drawing: canceling an edge – no target node found //
         else if ((edgeBeingDrawn != null) && GetComponent<Controller>().touchpad_unpressing() && ((potentialNodeInRange == null) || (potentialNodeInRange == startingNode)))        // if: an edge is currently being drawn, this controller's touchpad is unpressing, there is no node other than the starting node within range
         {
-            // spawn a node called "Node" at this controller's position, parented to the nodes container //
-            GameObject node = Instantiate(nodeTemplate) as GameObject;
-            node.name = "Node";
-            node.transform.parent = nodesContainer;
-            node.transform.position = transform.position;
-
-            // finish this edge drawing //
-            // set the edge's second point to be the target node's position //
-            edgeBeingDrawn.GetComponent<LineRenderer>().SetPosition(1, node.transform.position);
-            // set the edge's position to be the midpoint between its ends' (deriving) positions //
-            edgeBeingDrawn.transform.position = Vector3.Lerp(startingNode.transform.position, node.transform.position, .5f);
-            // track the edge drawn as connected for both the starting and the finishing nodes //
-            startingNode.GetComponent<ConnectedEdges>().connectEdge(edgeBeingDrawn);
-            Debug.Log("about to do: node.GetComponent<ConnectedEdges>().connectEdge(edgeBeingDrawn);");
-            node.GetComponent<ConnectedEdges>().connectEdge(edgeBeingDrawn);
-            // track both the starting and finishing nodes as being connected to the edge drawn //
-            edgeBeingDrawn.GetComponent<ConnectedNodes>().connectNode(startingNode);
-            edgeBeingDrawn.GetComponent<ConnectedNodes>().connectNode(node);
+            // destroy the edge being drawn //
+            Destroy(edgeBeingDrawn);
             // reset both tracking variables to null //
             edgeBeingDrawn = null;
             startingNode = null;
@@ -80,7 +62,7 @@ public class EdgeDrawer : MonoBehaviour
         else if ((edgeBeingDrawn != null) && GetComponent<Controller>().touchpad_unpressing() && ((potentialNodeInRange != null) && (potentialNodeInRange != startingNode)))      // if: an edge is currently drawn, this controller's touchpad is unpressing, there is a node other than the starting node within range
         {
             // if the target node found already has an identical edge: cancel this edge drawing //
-            if (potentialNodeInRange.GetComponent<ConnectedEdges>().identicalEdge(new List<GameObject>(new GameObject[] { startingNode, potentialNodeInRange })))
+            if (potentialNodeInRange.GetComponent<ConnectedEdges>().identicalEdge(new List<GameObject>(new GameObject[] {startingNode, potentialNodeInRange})))
             {
                 // destroy the edge being drawn //
                 Destroy(edgeBeingDrawn);

@@ -14,9 +14,7 @@ public class ConnectedEdges : MonoBehaviour
     // method: add a connection to the specified edge to the list of connected edges
     public void connectEdge(GameObject edge)
     {
-        Debug.Log("Node "+GetInstanceID()+" is trying to list edge "+ edge.GetInstanceID()+" as connected.");
         connectedEdges.Add(edge);
-        Debug.Log("First edge:"+connectedEdges[0].name);
     }
 
     // method: determine if the given edge is identical to an edge already connected to this node //
