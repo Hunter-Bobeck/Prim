@@ -36,4 +36,35 @@ public class NodeDetector : MonoBehaviour
         // otherwise* (if the shortest distance node index was not set past its default of -1, thus the list of nodes found in range was empty), return null //
         return null;
     }
+
+    // nodes container transform connection: set at the start
+    private Transform containerNodes;
+    void Start()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name == "Nodes")
+                containerNodes = child;
+        }
+    }
+
+    // method: determine the node nearest to a given position – assumes that there is at least one node in the nodes container //
+    public GameObject nodeNearestTo(Vector3 givenPosition)
+    {
+        GameObject nearestNodeYet = null;      // tracks the nearest node found thus far; defaulted to null but it should never end up staying null
+        float nearestNodeYetDistance = float.MaxValue;      // tracks the distance of the nearest node found thus far (used to compare the distance of each node to); defaulted to the maximum value
+
+        // iterate through the nodes container to update the nearest node found (based on comparing each node to the nearest node found thus far)
+        foreach (Transform nodeTransform in containerNodes)
+        {
+            float distance = Vector3.Distance(givenPosition, nodeTransform.position);
+            if (distance < nearestNodeYetDistance)
+            {
+                nearestNodeYet = nodeTransform.gameObject;
+                nearestNodeYetDistance = distance;
+            }
+        }
+
+        return nearestNodeYet;      // return the nearest node found now that comparing has finished
+    }
 }
