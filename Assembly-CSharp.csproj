@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\GraphScaler.cs" />
      <Compile Include="Assets\Scripts\NodeDetector.cs" />
      <Compile Include="Assets\Scripts\NodeSpawner.cs" />
+     <Compile Include="Assets\Scripts\PrimCode.cs" />
      <Compile Include="Assets\Scripts\Virtuality-Controls\Average_Position.cs" />
      <Compile Include="Assets\Scripts\Virtuality-Controls\Controller.cs" />
      <Compile Include="Assets\Scripts\Virtuality-Controls\Delayed_Destruction.cs" />

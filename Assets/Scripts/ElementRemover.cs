@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// removes any node\edge colliding with this controller when a grip button is pressed, updating connections accordingly //
+// removes any node colliding with this controller when a grip button is pressed, updating connections accordingly //
 public class ElementRemover : MonoBehaviour
 {
 	void OnTriggerStay(Collider collider)
@@ -37,7 +37,7 @@ public class ElementRemover : MonoBehaviour
                 // destroy the node //
                 Destroy(node);
             }
-            else if (collider.gameObject.tag == "Edge Collider Box")      // otherwise, if the collided object is an edge collider box
+            /*else if (collider.gameObject.tag == "Edge Collider Box")      // otherwise, if the collided object is an edge collider box
             {
                 GameObject edge = collider.gameObject.transform.parent.gameObject;       // get a connection to the collided edge collider box's (parent) edge
 
@@ -54,7 +54,7 @@ public class ElementRemover : MonoBehaviour
                 }
                 // destroy the edge //
                 Destroy(edge);
-            }
+            }*/
         }
 	}
 }

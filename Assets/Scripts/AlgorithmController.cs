@@ -48,6 +48,20 @@ public class AlgorithmController : MonoBehaviour
                     Controller pressingController = (controllerLeft.menu_button_pressing() ? controllerLeft : controllerRight);        // determine which controller is doing the pressing and thus to choose the nearest node from – choose the left controller if both are
                     startingNode = GetComponent<NodeDetector>().nodeNearestTo(pressingController.transform.position);       // choose the node closest to the pressing controller
 
+                    GameObject temporaryContainer = new GameObject();
+                    foreach (Transform child in containerNodes)
+                    {
+                        if (child.gameObject != startingNode)
+                            child.transform.parent = temporaryContainer.transform;
+                    }
+                    for (int i = temporaryContainer.transform.childCount - 1; i >= 0; i--)
+                    {
+                        Transform child = temporaryContainer.transform.GetChild(i);
+
+                        child.parent = containerNodes;
+                    }
+                    Destroy(temporaryContainer);
+
                     // begin displaying the MST //
                     display();
                 }
@@ -71,12 +85,10 @@ public class AlgorithmController : MonoBehaviour
     // method: begin displaying the MST //
     void display()
     {
-        List<GameObject> connectedEdges = startingNode.GetComponent<ConnectedEdges>().connectedEdges;
-        foreach (GameObject connectedEdge in connectedEdges)
-        {
-            connectedEdge.GetComponent<LineRenderer>().material = highlighted;
-        }
-
         List<GameObject> edgesToHighlight = PrimCode.Prim(containerNodes);
+        foreach (GameObject edgeToHighlight in edgesToHighlight)
+        {
+            edgeToHighlight.GetComponent<LineRenderer>().material = highlighted;
+        }
     }
 }

@@ -24,22 +24,22 @@ public class PrimCode
         return minIndex;
     }
 
-    private static List<GameObject> Listify(int[] parent, GameObject nodes, int verticesCount)
+    private static List<GameObject> Listify(int[] parent, Transform nodes, int verticesCount)
     {
         List<GameObject> returnList = new List<GameObject>();
         for (int i = 1; i < verticesCount; ++i)
         {
             GameObject edge = helperConnectedTo(parent[i], i, nodes);
-            if(edge == Null) debug.log("Hunter broke it");
-            returnList.add(edge);
+            if(edge == null) Debug.Log("Hunter broke it");
+            returnList.Add(edge);
         }
         return returnList;
     }
 
-    public static void Prim(GameObject nodes)
+    public static List<GameObject> Prim(Transform nodes)
     {
         //instantiate arrays
-        int verticesCount = nodes.transform.childCount;
+        int verticesCount = nodes.childCount;
         int[] parent = new int[verticesCount];
         float[] key = new float[verticesCount];
         bool[] mstSet = new bool[verticesCount];
@@ -63,7 +63,7 @@ public class PrimCode
             //update parent and key for each neighbor if the weight is lower
             for (int v = 0; v < verticesCount; ++v)
             {
-                if(helperConnectedTo(u, v, nodes) != Null)
+                if(helperConnectedTo(u, v, nodes) != null)
                 {
                     GameObject edge = helperConnectedTo(u, v, nodes);
                     float weight = edge.GetComponent<DistanceWeightUpdating>().distance;
@@ -80,10 +80,10 @@ public class PrimCode
         return Listify(parent, nodes, verticesCount);
     }
 
-    public GameObject helperConnectedTo(int u, int v, GameObject nodes)
+    public static GameObject helperConnectedTo(int u, int v, Transform nodes)
     {
-        GameObject uNode = nodes.getChild(u);
-        GameObject vNode = nodes.getChild(v);
+        GameObject uNode = nodes.GetChild(u).gameObject;
+        GameObject vNode = nodes.GetChild(v).gameObject;
         return uNode.GetComponent<ConnectedEdges>().connectedTo(vNode);
     }
 }
