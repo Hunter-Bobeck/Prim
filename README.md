@@ -19,8 +19,14 @@ Created in Unity using SteamVR, Prim is a Vive virtuality application that allow
 
 The following controls are identical for each Vive controller.
 
+Graph adjustments:
 * *Touchpad Press* - create node
 * *Touchpad Hold* - create edge from initially contacted node to finally contacted node 
 * *Trigger Press and Hold* - grab and reposition contacted node
 * *Grip Press - Single Controller* - delete contacted node\edge
 * *Grip Press - Both Controllers* - delete all elements in the graph
+
+Prim's Algorithm command:
+* *Menu Button Press - Either Controller* - toggle the Prim minimum spanning tree visualization; when starting, the starting node will be chosen to be the node nearest to the controller doing the pressing
+
+When making any adjustments to the graph, if the Prim minimum spanning tree is currently displaying, it will be toggled off.
