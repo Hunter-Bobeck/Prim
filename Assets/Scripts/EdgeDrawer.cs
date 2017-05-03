@@ -41,11 +41,19 @@ public class EdgeDrawer : MonoBehaviour
             // set the edge's position to be the midpoint between its ends' (deriving) positions //
             edgeBeingDrawn.transform.position = Vector3.Lerp(startingNode.transform.position, transform.position, .5f);
         }
-        // edge drawing: canceling an edge – no target node found //
+        // edge drawing: no target node found – finishing an edge (and have it create its target node and handle its connections by itself, based on this controller doing the spawning) //
         else if ((edgeBeingDrawn != null) && GetComponent<Controller>().touchpad_unpressing() && ((potentialNodeInRange == null) || (potentialNodeInRange == startingNode)))        // if: an edge is currently being drawn, this controller's touchpad is unpressing, there is no node other than the starting node within range
         {
-            // destroy the edge being drawn //
-            Destroy(edgeBeingDrawn);
+            // set the edge's second point to be controller's position //
+            edgeBeingDrawn.GetComponent<LineRenderer>().SetPosition(1, transform.position);
+            // set the edge's position to be the midpoint between its ends' (deriving) positions //
+            edgeBeingDrawn.transform.position = Vector3.Lerp(startingNode.transform.position, transform.position, .5f);
+            // track the edge drawn as connected for both the starting and the finishing nodes //
+            startingNode.GetComponent<ConnectedEdges>().connectEdge(edgeBeingDrawn);
+            // track both the starting and finishing nodes as being connected to the edge drawn //
+            edgeBeingDrawn.GetComponent<ConnectedNodes>().connectNode(startingNode);
+            // have the new edge create its target node and handle its connections by itself, based on this controller doing the spawning //
+            edgeBeingDrawn.GetComponent<EdgeTargetNodeCreation>().spawnNode(GetComponent<NodeSpawner>());
             // reset both tracking variables to null //
             edgeBeingDrawn = null;
             startingNode = null;

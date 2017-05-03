@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\EdgeDrawer.cs" />
      <Compile Include="Assets\Scripts\EdgeEndPositionTracking.cs" />
      <Compile Include="Assets\Scripts\EdgePositionUpdating.cs" />
+     <Compile Include="Assets\Scripts\EdgeTargetNodeCreation.cs" />
      <Compile Include="Assets\Scripts\ElementRemover.cs" />
      <Compile Include="Assets\Scripts\GraphResetter.cs" />
      <Compile Include="Assets\Scripts\GraphScaler.cs" />
