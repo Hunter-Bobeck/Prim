@@ -2,6 +2,8 @@
 
 Created in Unity using SteamVR, Prim is a Vive virtuality application that allows the player to create an undirected graph and visualize [Prim's Algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm).
 
+### [Demo Video](https://www.youtube.com/watch?v=oWiETzhIFOM&feature=youtu.be)
+
 ## Features
 
 * *Graph* - The player can create a graph out of two kinds of elements: nodes, and automatic distance weighted undirected edges.
