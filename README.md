@@ -13,7 +13,7 @@ Created in Unity using SteamVR, Prim is a Vive virtuality application that allow
 
 * *Nodes* - represented by blue spheres
 * *Edges* - represented by green lines by default; yellow when highlighted by Prim's algorithm
-* *Weights* - number text label above each corresponding edge
+* *Weights* - number text label above each corresponding edge (distance is in meters)
 
 ### Controls
 
