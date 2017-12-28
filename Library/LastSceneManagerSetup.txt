@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Prim.unity
-  isLoaded: 1
-  isActive: 1
